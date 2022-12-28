@@ -8,6 +8,7 @@ import android.util.Log
 import android.widget.Toast
 import com.bumptech.glide.Glide
 import com.example.legostore.databinding.ActivityMainBinding
+import com.example.legostore.ui.ProductActivity
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.auth.ktx.userProfileChangeRequest
@@ -29,9 +30,9 @@ class MainActivity : AppCompatActivity() {
         updateUI()
 
         binding.updateProfileAppCompatButton.setOnClickListener {
-            val name = binding.nameEditText.text.toString()
-
-            updateProfile(name)
+            //val name = binding.nameEditText.text.toString()
+            //updateProfile(name)
+            showProducts()
         }
 
         binding.profileImageView.setOnClickListener {
@@ -42,6 +43,11 @@ class MainActivity : AppCompatActivity() {
             signOut()
         }
 
+    }
+
+    private fun showProducts() {
+        val intent = Intent(this, ProductActivity::class.java)
+        this.startActivity(intent)
     }
 
     private  fun updateProfile (name : String) {

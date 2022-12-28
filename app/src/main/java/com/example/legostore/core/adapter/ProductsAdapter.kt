@@ -4,9 +4,9 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.legostore.R
-import com.example.legostore.data.ProductDb
+import com.example.legostore.data.ProductsDetailsDb
 
-class ProductsAdapter(var productAllList: List<ProductDb>): RecyclerView.Adapter<ProductsHolder>() {
+class ProductsAdapter(var productAllList: List<ProductsDetailsDb>): RecyclerView.Adapter<ProductsHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ProductsHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
         return ProductsHolder(layoutInflater.inflate(R.layout.item_products, parent, false))

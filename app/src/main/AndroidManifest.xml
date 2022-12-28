@@ -17,7 +17,7 @@
         android:theme="@style/Theme.LegoStore"
         tools:targetApi="31">
         <activity
-            android:name=".ProductActivity"
+            android:name=".ui.ProductActivity"
             android:exported="false" />
         <activity android:name=".CheckEmailActivity" />
         <activity
