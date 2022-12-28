@@ -26,7 +26,6 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
         auth = Firebase.auth
-
         updateUI()
 
         binding.updateProfileAppCompatButton.setOnClickListener {
@@ -75,9 +74,7 @@ class MainActivity : AppCompatActivity() {
         if (requestCode == fileResult) {
             if (resultCode == RESULT_OK && data != null) {
                 val uri = data.data
-
                 uri?.let { imageUpload(it) }
-
             }
         }
     }
@@ -108,7 +105,6 @@ class MainActivity : AppCompatActivity() {
             Log.i("TAG", "file upload error")
         }
     }
-
 
 
     private  fun updateUI () {

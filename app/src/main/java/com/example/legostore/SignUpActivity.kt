@@ -49,11 +49,6 @@ class SignUpActivity : AppCompatActivity() {
 
         }
 
-        binding.backImageView.setOnClickListener {
-            val intent = Intent(this, SignInActivity::class.java)
-            this.startActivity(intent)
-        }
-
     }
 
     public override fun onStart() {
