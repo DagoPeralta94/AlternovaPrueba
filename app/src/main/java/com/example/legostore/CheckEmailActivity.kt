@@ -32,12 +32,13 @@ class CheckEmailActivity : AppCompatActivity() {
                             val intent = Intent(this, MainActivity::class.java)
                             this.startActivity(intent)
                         } else {
-                            Toast.makeText(this, "Por favor verifica tu correo.",
-                                Toast.LENGTH_SHORT).show()
+                            Toast.makeText(
+                                this, "Por favor verifica tu correo.",
+                                Toast.LENGTH_SHORT
+                            ).show()
                         }
                     }
                 }
-
         }
 
         binding.signOutImageView.setOnClickListener {
@@ -49,8 +50,8 @@ class CheckEmailActivity : AppCompatActivity() {
     public override fun onStart() {
         super.onStart()
         val currentUser = auth.currentUser
-        if(currentUser != null){
-            if(currentUser.isEmailVerified){
+        if (currentUser != null) {
+            if (currentUser.isEmailVerified) {
                 reload()
             } else {
                 sendEmailVerification()
@@ -63,8 +64,10 @@ class CheckEmailActivity : AppCompatActivity() {
         user!!.sendEmailVerification()
             .addOnCompleteListener(this) { task ->
                 if (task.isSuccessful) {
-                    Toast.makeText(this, "Se ha enviado un correo de verifiación.",
-                        Toast.LENGTH_SHORT).show()
+                    Toast.makeText(
+                        this, "Se ha enviado un correo de verifiación.",
+                        Toast.LENGTH_SHORT
+                    ).show()
                 }
             }
     }
@@ -74,7 +77,7 @@ class CheckEmailActivity : AppCompatActivity() {
         this.startActivity(intent)
     }
 
-    private  fun signOut(){
+    private fun signOut() {
         Firebase.auth.signOut()
         val intent = Intent(this, SignInActivity::class.java)
         this.startActivity(intent)

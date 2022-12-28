@@ -39,16 +39,6 @@ class MainActivity : AppCompatActivity() {
             fileManager()
         }
 
-        binding.deleteAccountTextView.setOnClickListener {
-            val intent = Intent(this, DeleteAccountActivity::class.java)
-            this.startActivity(intent)
-        }
-
-        binding.updatePasswordTextView.setOnClickListener {
-            val intent = Intent(this, UpdatePasswordActivity::class.java)
-            this.startActivity(intent)
-        }
-
         binding.signOutImageView.setOnClickListener {
             signOut()
         }
