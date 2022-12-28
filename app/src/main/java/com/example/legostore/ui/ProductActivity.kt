@@ -2,6 +2,7 @@ package com.example.legostore.ui
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.legostore.R
 import com.example.legostore.aplications.AppConstants
@@ -39,13 +40,17 @@ class ProductActivity : AppCompatActivity() {
                 LinearLayoutManager.VERTICAL,
                 false
             )
-            rvProducts.adapter = ProductsAdapter(productList)
-            ProductsAdapter(productList).notifyDataSetChanged()
+            rvProducts.adapter = ProductsAdapter(productList)  { onItemSelected(it) }
+            ProductsAdapter(productList)  { onItemSelected(it) } .notifyDataSetChanged()
         }
     }
 
     private suspend fun launchData() {
         var productDblist = ProductDbClient.service.listAllProducts(AppConstants.API_KEY)
         productList = productDblist.products
+    }
+
+    private fun onItemSelected(listDetailProv: ProductsDetailsDb){
+        Toast.makeText(binding.rvProducts.context, listDetailProv.name, Toast.LENGTH_SHORT).show()
     }
 }

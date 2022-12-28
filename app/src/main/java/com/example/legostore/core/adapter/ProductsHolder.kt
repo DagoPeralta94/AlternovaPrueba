@@ -11,13 +11,14 @@ import com.example.legostore.databinding.ItemProductsBinding
 class ProductsHolder(view: View) : RecyclerView.ViewHolder(view) {
     val binding = ItemProductsBinding.bind(view)
 
-    fun render(listModelAllProducts: ProductsDetailsDb) {
+    fun render(listModelAllProducts: ProductsDetailsDb, onClickListener:(ProductsDetailsDb) -> Unit) {
         with(binding) {
             Glide.with(ivMovies.context).load("${listModelAllProducts.image}")
                 .into(ivMovies)
             tvProductName.text = listModelAllProducts.name
             tvProductPrice.text = listModelAllProducts.unit_price.toString()
             tvProductStock.text = listModelAllProducts.stock.toString()
+            itemView.setOnClickListener { onClickListener(listModelAllProducts) }
         }
     }
 }
