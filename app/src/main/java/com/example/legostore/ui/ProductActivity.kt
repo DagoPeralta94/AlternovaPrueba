@@ -7,6 +7,7 @@ import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.legostore.aplications.AppConstants
 import com.example.legostore.core.adapter.ProductsAdapter
+import com.example.legostore.data.ProductDb
 import com.example.legostore.data.ProductDbClient
 import com.example.legostore.data.ProductsDetailsDb
 import com.example.legostore.databinding.ActivityProductBinding
@@ -55,6 +56,11 @@ class ProductActivity : AppCompatActivity() {
         val intent = Intent(this, ProductDetailsActivity::class.java)
         intent.putExtra("idProvF", idProv)
         startActivity(intent)
+    }
+
+    private suspend fun sendPostBuy() {
+        var productDblist = ProductDbClient.service.requestBuy()
+        productList = productDblist.products
     }
 
 }

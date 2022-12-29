@@ -8,6 +8,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.legostore.aplications.AppConstants
 import com.example.legostore.data.ProductDb
+import com.example.legostore.data.ProductDbClient
+import com.example.legostore.data.ProductDescriptionDb
 import com.example.legostore.data.ProductsDetailsDb
 import com.example.legostore.databinding.ItemProductsBinding
 import com.example.legostore.ui.ProductDetailsActivity
@@ -16,6 +18,7 @@ import kotlin.system.exitProcess
 class ProductsHolder(view: View) : RecyclerView.ViewHolder(view) {
     val binding = ItemProductsBinding.bind(view)
     var countPlus: Int = 0
+    lateinit var productDescList: List<ProductDb>
 
     fun render(
         listModelAllProducts: ProductsDetailsDb,
@@ -29,8 +32,11 @@ class ProductsHolder(view: View) : RecyclerView.ViewHolder(view) {
             tvProductStock.text = ("Stock: ${listModelAllProducts.stock.toString()}")
             txMountToBuy.text = countPlus.toString()
             setButtonMount(listModelAllProducts)
-            toBuyItem(listModelAllProducts)
+            setNoStock(listModelAllProducts)
+
             itemView.setOnClickListener { onClickListener(listModelAllProducts) }
+
+
             btPlus.setOnClickListener {
                 setBtPlus(listModelAllProducts)
             }
@@ -63,7 +69,7 @@ class ProductsHolder(view: View) : RecyclerView.ViewHolder(view) {
         }
     }
 
-    fun toBuyItem(listModelAllProducts: ProductsDetailsDb) {
+    private fun setNoStock(listModelAllProducts: ProductsDetailsDb) {
         if (listModelAllProducts.stock.toString().toInt() == 0) {
             with(binding) {
                 btBuy.isEnabled = false
@@ -73,12 +79,12 @@ class ProductsHolder(view: View) : RecyclerView.ViewHolder(view) {
         }
     }
 
-    fun setButtonMount(listModelAllProducts: ProductsDetailsDb) {
+    private fun setButtonMount(listModelAllProducts: ProductsDetailsDb) {
         binding.btMenus.isEnabled = binding.txMountToBuy.text.toString().toInt() != 0
         binding.btPlus.isEnabled = binding.txMountToBuy.text.toString().toInt() != listModelAllProducts.stock
     }
 
-    private fun alertDialogShow(listModelAllProducts: ProductsDetailsDb) {
+    private fun alertDialogShow(listModelAllProducts: ProductsDetailsDb) =
         if(binding.txMountToBuy.text.toString().toInt() != 0){
             val builder = AlertDialog.Builder(binding.btBuy.context)
             builder.setTitle("CONFIRM PRODUCTS")
@@ -87,7 +93,6 @@ class ProductsHolder(view: View) : RecyclerView.ViewHolder(view) {
 
             builder.setPositiveButton("YES") { dialogInterface, which ->
                 Toast.makeText(binding.btMenus.context, "Buy Confirmed", Toast.LENGTH_SHORT).show()
-                sendPostBuy()
                 setDefaultValues(listModelAllProducts)
             }
             builder.setNegativeButton("NO") { dialogInterface, which ->
@@ -99,7 +104,6 @@ class ProductsHolder(view: View) : RecyclerView.ViewHolder(view) {
         }else{
             Toast.makeText(binding.btMenus.context, "Add some products", Toast.LENGTH_SHORT).show()
         }
-    }
 
     private fun setDefaultValues(listModelAllProducts: ProductsDetailsDb){
         binding.txMountToBuy.text = "0"
@@ -107,7 +111,5 @@ class ProductsHolder(view: View) : RecyclerView.ViewHolder(view) {
         setButtonMount(listModelAllProducts)
     }
 
-    private fun sendPostBuy() {
 
-    }
 }
