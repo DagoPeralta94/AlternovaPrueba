@@ -86,7 +86,7 @@
             android:layout_marginHorizontal="10dp"
             android:text="0"/>
         <Button
-            android:id="@+id/bt_plu"
+            android:id="@+id/bt_plus"
             android:layout_width="48dp"
             android:layout_height="wrap_content"
             android:text="+"/>

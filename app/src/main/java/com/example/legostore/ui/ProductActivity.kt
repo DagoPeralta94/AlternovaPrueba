@@ -57,9 +57,4 @@ class ProductActivity : AppCompatActivity() {
         startActivity(intent)
     }
 
-    private fun onButtomSelected(listDetailProv: ProductsDetailsDb) {
-        stockProv = listDetailProv.stock.toString()
-        Toast.makeText(this, "$stockProv", Toast.LENGTH_SHORT).show()
-
-    }
 }
