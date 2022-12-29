@@ -16,8 +16,8 @@ class ProductsHolder(view: View) : RecyclerView.ViewHolder(view) {
             Glide.with(ivMovies.context).load("${listModelAllProducts.image}")
                 .into(ivMovies)
             tvProductName.text = listModelAllProducts.name
-            tvProductPrice.text = listModelAllProducts.unit_price.toString()
-            tvProductStock.text = listModelAllProducts.stock.toString()
+            tvProductPrice.text = ("Price: ${listModelAllProducts.unit_price.toString()}")
+            tvProductStock.text = ("Stock: ${listModelAllProducts.stock.toString()}")
             itemView.setOnClickListener { onClickListener(listModelAllProducts) }
         }
     }

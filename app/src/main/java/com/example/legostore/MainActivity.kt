@@ -30,8 +30,8 @@ class MainActivity : AppCompatActivity() {
         updateUI()
 
         binding.updateProfileAppCompatButton.setOnClickListener {
-            //val name = binding.nameEditText.text.toString()
-            //updateProfile(name)
+            val name = binding.nameEditText.text.toString()
+            updateProfile(name)
             showProducts()
         }
 
