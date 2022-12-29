@@ -36,19 +36,21 @@
         android:textSize="25sp"
         android:text="Articulo Comprado"/>
 
-    <Button
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/bt_again"
         android:layout_width="150dp"
         android:layout_height="wrap_content"
+        android:background="@drawable/ic_buttom"
         app:layout_constraintTop_toBottomOf="@id/txt_thanks"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/bt_exit"
         android:text="BUY AGAIN"/>
 
-    <Button
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/bt_exit"
         android:layout_width="150dp"
         android:layout_height="wrap_content"
+        android:background="@drawable/ic_buttom"
         app:layout_constraintTop_toBottomOf="@id/txt_thanks"
         app:layout_constraintStart_toEndOf="@+id/bt_again"
         app:layout_constraintEnd_toEndOf="parent"

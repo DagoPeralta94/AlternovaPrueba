@@ -73,7 +73,6 @@ class ProductActivity : AppCompatActivity() {
         startActivity(intent)
     }
 
-
     private fun alertDialogShow(listModelAllProducts: ProductsDetailsDb) =
         if (listModelAllProducts.stockSold != 0) {
             val builder = AlertDialog.Builder(binding.root.context)

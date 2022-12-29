@@ -47,6 +47,7 @@ class ConfirmeBuyActivity : AppCompatActivity() {
             startActivity(intent)
         }
     }
+
     private suspend fun sendPostBuy() {
         var productDblist = ProductDbClient.service.requestBuy()
         productDescList = listOf(productDblist)

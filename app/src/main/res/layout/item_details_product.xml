@@ -77,10 +77,11 @@
             app:layout_constraintEnd_toEndOf="parent"
             android:orientation="horizontal">
 
-            <Button
+            <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/bt_menus"
                 android:layout_width="48dp"
                 android:layout_height="wrap_content"
+                android:background="@drawable/ic_buttom"
                 android:text="-"/>
             <TextView
                 android:id="@+id/tx_mount_to_buy"
@@ -88,21 +89,23 @@
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="10dp"
                 android:text="0"/>
-            <Button
+            <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/bt_plus"
                 android:layout_width="48dp"
                 android:layout_height="wrap_content"
+                android:background="@drawable/ic_buttom"
                 android:text="+"/>
 
         </LinearLayout>
 
-        <Button
+        <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/bt_buy"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:layout_constraintTop_toBottomOf="@+id/ly_bts"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            android:background="@drawable/ic_buttom"
             android:text="BUY"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
