@@ -17,6 +17,9 @@
         android:theme="@style/Theme.LegoStore"
         tools:targetApi="31">
         <activity
+            android:name=".ui.ConfirmeBuyActivity"
+            android:exported="false" />
+        <activity
             android:name=".ui.ProductDetailsActivity"
             android:exported="false" />
         <activity

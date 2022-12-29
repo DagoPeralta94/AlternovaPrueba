@@ -39,7 +39,6 @@ class ProductsHolder(view: View) : RecyclerView.ViewHolder(view) {
 
             itemView.setOnClickListener { onClickListener(listModelAllProducts) }
             btBuy.setOnClickListener {
-                alertDialogShow(listModelAllProducts)
                 onBuyListener(listModelAllProducts)
             }
 
