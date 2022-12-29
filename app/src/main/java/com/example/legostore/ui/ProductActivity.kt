@@ -44,7 +44,7 @@ class ProductActivity : AppCompatActivity() {
                 false
             )
             rvProducts.adapter = ProductsAdapter(productList, { onItemSelected(it) }, { alertDialogShow(it) })
-            ProductsAdapter(productList, { onItemSelected(it) }, { onBuySelected(it) }).notifyDataSetChanged()
+            ProductsAdapter(productList, { onItemSelected(it) }, { alertDialogShow(it) }).notifyDataSetChanged()
         }
     }
 
@@ -63,6 +63,7 @@ class ProductActivity : AppCompatActivity() {
 
     private fun onBuySelected(listDetailProv: ProductsDetailsDb){
         stockProv = listDetailProv.stockSold.toString()
+        finish()
         val intent = Intent(this, ConfirmeBuyActivity::class.java)
         intent.putExtra("stockProvF", stockProv)
         startActivity(intent)
