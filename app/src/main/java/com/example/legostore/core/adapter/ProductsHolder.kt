@@ -1,13 +1,17 @@
 package com.example.legostore.core.adapter
 
+import android.content.Intent
 import android.view.View
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.legostore.aplications.AppConstants
 import com.example.legostore.data.ProductDb
 import com.example.legostore.data.ProductsDetailsDb
 import com.example.legostore.databinding.ItemProductsBinding
+import com.example.legostore.ui.ProductDetailsActivity
+import kotlin.system.exitProcess
 
 class ProductsHolder(view: View) : RecyclerView.ViewHolder(view) {
     val binding = ItemProductsBinding.bind(view)
@@ -34,7 +38,7 @@ class ProductsHolder(view: View) : RecyclerView.ViewHolder(view) {
                 setBtMenus(listModelAllProducts)
             }
             btBuy.setOnClickListener {
-                Toast.makeText(btBuy.context, "${txMountToBuy.text}", Toast.LENGTH_SHORT).show()
+                alertDialogShow(listModelAllProducts)
             }
         }
     }
@@ -72,5 +76,38 @@ class ProductsHolder(view: View) : RecyclerView.ViewHolder(view) {
     fun setButtonMount(listModelAllProducts: ProductsDetailsDb) {
         binding.btMenus.isEnabled = binding.txMountToBuy.text.toString().toInt() != 0
         binding.btPlus.isEnabled = binding.txMountToBuy.text.toString().toInt() != listModelAllProducts.stock
+    }
+
+    private fun alertDialogShow(listModelAllProducts: ProductsDetailsDb) {
+        if(binding.txMountToBuy.text.toString().toInt() != 0){
+            val builder = AlertDialog.Builder(binding.btBuy.context)
+            builder.setTitle("CONFIRM PRODUCTS")
+            builder.setMessage("Item: ${listModelAllProducts.name}\nMount: ${binding.txMountToBuy.text}")
+            builder.setIcon(android.R.drawable.ic_dialog_alert)
+
+            builder.setPositiveButton("YES") { dialogInterface, which ->
+                Toast.makeText(binding.btMenus.context, "Buy Confirmed", Toast.LENGTH_SHORT).show()
+                sendPostBuy()
+                setDefaultValues(listModelAllProducts)
+            }
+            builder.setNegativeButton("NO") { dialogInterface, which ->
+                Toast.makeText(binding.btMenus.context, "Buy Cancel", Toast.LENGTH_SHORT).show()
+            }
+            val alertDialog: AlertDialog = builder.create()
+            alertDialog.setCancelable(false)
+            alertDialog.show()
+        }else{
+            Toast.makeText(binding.btMenus.context, "Add some products", Toast.LENGTH_SHORT).show()
+        }
+    }
+
+    private fun setDefaultValues(listModelAllProducts: ProductsDetailsDb){
+        binding.txMountToBuy.text = "0"
+        countPlus = 0
+        setButtonMount(listModelAllProducts)
+    }
+
+    private fun sendPostBuy() {
+
     }
 }
