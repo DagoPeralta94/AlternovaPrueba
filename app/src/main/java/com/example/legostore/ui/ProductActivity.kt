@@ -43,8 +43,12 @@ class ProductActivity : AppCompatActivity() {
                 LinearLayoutManager.VERTICAL,
                 false
             )
-            rvProducts.adapter = ProductsAdapter(productList, { onItemSelected(it) }, { alertDialogShow(it) })
-            ProductsAdapter(productList, { onItemSelected(it) }, { alertDialogShow(it) }).notifyDataSetChanged()
+            rvProducts.adapter =
+                ProductsAdapter(productList, { onItemSelected(it) }, { alertDialogShow(it) })
+            ProductsAdapter(
+                productList,
+                { onItemSelected(it) },
+                { alertDialogShow(it) }).notifyDataSetChanged()
         }
     }
 
@@ -54,14 +58,14 @@ class ProductActivity : AppCompatActivity() {
         productListProv = productDblist.products
     }
 
-    private fun onItemSelected(listDetailProv: ProductsDetailsDb){
+    private fun onItemSelected(listDetailProv: ProductsDetailsDb) {
         idProv = listDetailProv.id.toString()
         val intent = Intent(this, ProductDetailsActivity::class.java)
         intent.putExtra("idProvF", idProv)
         startActivity(intent)
     }
 
-    private fun onBuySelected(listDetailProv: ProductsDetailsDb){
+    private fun onBuySelected(listDetailProv: ProductsDetailsDb) {
         stockProv = listDetailProv.name
         finish()
         val intent = Intent(this, ConfirmeBuyActivity::class.java)
@@ -70,9 +74,8 @@ class ProductActivity : AppCompatActivity() {
     }
 
 
-
     private fun alertDialogShow(listModelAllProducts: ProductsDetailsDb) =
-        if(listModelAllProducts.stockSold != 0){
+        if (listModelAllProducts.stockSold != 0) {
             val builder = AlertDialog.Builder(binding.root.context)
             builder.setTitle("CONFIRM PRODUCTS")
             builder.setMessage("Item: ${listModelAllProducts.name}\nMount: ${listModelAllProducts.stockSold}")
@@ -88,7 +91,7 @@ class ProductActivity : AppCompatActivity() {
             val alertDialog: AlertDialog = builder.create()
             alertDialog.setCancelable(false)
             alertDialog.show()
-        }else{
+        } else {
             Toast.makeText(binding.root.context, "Add some products", Toast.LENGTH_SHORT).show()
         }
 

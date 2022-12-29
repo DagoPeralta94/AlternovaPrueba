@@ -7,15 +7,24 @@ import com.example.legostore.R
 import com.example.legostore.data.ProductDescriptionDb
 import com.example.legostore.data.ProductsDetailsDb
 
-class DetailsProdAdapter(var detailList: List<ProductDescriptionDb>): RecyclerView.Adapter<DetailsProdHolder>() {
+class DetailsProdAdapter(
+    var detailList: List<ProductDescriptionDb>,
+    private val onBuyListener: (ProductDescriptionDb) -> Unit
+) : RecyclerView.Adapter<DetailsProdHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DetailsProdHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
-        return DetailsProdHolder(layoutInflater.inflate(R.layout.item_details_product, parent, false))
+        return DetailsProdHolder(
+            layoutInflater.inflate(
+                R.layout.item_details_product,
+                parent,
+                false
+            )
+        )
     }
 
     override fun onBindViewHolder(holder: DetailsProdHolder, position: Int) {
         val item = detailList[position]
-        return holder.render(item)
+        return holder.render(item, onBuyListener)
     }
 
     override fun getItemCount(): Int = detailList.size

@@ -5,5 +5,6 @@ data class ProductDescriptionDb(
     val unit_price: Int,
     val stock: Int,
     val description: String,
-    val image: String
+    val image: String,
+    var stockSold: Int = 0
 )
