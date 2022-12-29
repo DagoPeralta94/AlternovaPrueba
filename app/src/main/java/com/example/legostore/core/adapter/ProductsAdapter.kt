@@ -4,6 +4,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.legostore.R
+import com.example.legostore.data.ProductDescriptionDb
 import com.example.legostore.data.ProductsDetailsDb
 
 class ProductsAdapter(var productAllList: List<ProductsDetailsDb>, private val onClickListener:(ProductsDetailsDb) -> Unit): RecyclerView.Adapter<ProductsHolder>() {
