@@ -18,12 +18,15 @@ import kotlin.system.exitProcess
 class ProductsHolder(view: View) : RecyclerView.ViewHolder(view) {
     val binding = ItemProductsBinding.bind(view)
     var countPlus: Int = 0
-    lateinit var productDescList: List<ProductDb>
+
 
     fun render(
         listModelAllProducts: ProductsDetailsDb,
-        onClickListener: (ProductsDetailsDb) -> Unit
+        onClickListener: (ProductsDetailsDb) -> Unit,
+        onBuyListener: (ProductsDetailsDb) -> Unit
     ) {
+        var stock = 0
+
         with(binding) {
             Glide.with(ivMovies.context).load("${listModelAllProducts.image}")
                 .into(ivMovies)
@@ -35,6 +38,10 @@ class ProductsHolder(view: View) : RecyclerView.ViewHolder(view) {
             setNoStock(listModelAllProducts)
 
             itemView.setOnClickListener { onClickListener(listModelAllProducts) }
+            btBuy.setOnClickListener {
+                alertDialogShow(listModelAllProducts)
+                onBuyListener(listModelAllProducts)
+            }
 
 
             btPlus.setOnClickListener {
@@ -43,9 +50,9 @@ class ProductsHolder(view: View) : RecyclerView.ViewHolder(view) {
             btMenus.setOnClickListener {
                 setBtMenus(listModelAllProducts)
             }
-            btBuy.setOnClickListener {
-                alertDialogShow(listModelAllProducts)
-            }
+            //btBuy.setOnClickListener {
+                //alertDialogShow(listModelAllProducts)
+            //}
         }
     }
 
@@ -54,19 +61,22 @@ class ProductsHolder(view: View) : RecyclerView.ViewHolder(view) {
             if (txMountToBuy.text.toString().toInt() <= listModelAllProducts.stock && txMountToBuy.text.toString().toInt() != 0) {
                 countPlus -= 1
                 txMountToBuy.text = countPlus.toString()
+                listModelAllProducts.stockSold -= 1
             }
             setButtonMount(listModelAllProducts)
         }
     }
 
-    private fun setBtPlus(listModelAllProducts: ProductsDetailsDb){
+    private fun setBtPlus(listModelAllProducts: ProductsDetailsDb) : Int{
         with(binding){
             if (countPlus >= 0 && txMountToBuy.text.toString().toInt() != listModelAllProducts.stock) {
                 countPlus += 1
                 txMountToBuy.text = countPlus.toString()
+                listModelAllProducts.stockSold += 1
             }
             setButtonMount(listModelAllProducts)
         }
+        return countPlus
     }
 
     private fun setNoStock(listModelAllProducts: ProductsDetailsDb) {

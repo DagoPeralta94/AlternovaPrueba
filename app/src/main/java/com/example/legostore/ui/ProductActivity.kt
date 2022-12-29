@@ -19,6 +19,7 @@ class ProductActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityProductBinding
     lateinit var productList: List<ProductsDetailsDb>
+    lateinit var productListProv: List<ProductsDetailsDb>
     var idProv: String = ""
     var stockProv: String = ""
 
@@ -41,20 +42,28 @@ class ProductActivity : AppCompatActivity() {
                 LinearLayoutManager.VERTICAL,
                 false
             )
-            rvProducts.adapter = ProductsAdapter(productList) { onItemSelected(it) }
-            ProductsAdapter(productList)  { onItemSelected(it) } .notifyDataSetChanged()
+            rvProducts.adapter = ProductsAdapter(productList, { onItemSelected(it) }, { onBuySelected(it) })
+            ProductsAdapter(productList, { onItemSelected(it) }, { onBuySelected(it) }).notifyDataSetChanged()
         }
     }
 
     private suspend fun launchData() {
         var productDblist = ProductDbClient.service.listAllProducts(AppConstants.API_KEY)
         productList = productDblist.products
+        productListProv = productDblist.products
     }
 
     private fun onItemSelected(listDetailProv: ProductsDetailsDb){
         idProv = listDetailProv.id.toString()
         val intent = Intent(this, ProductDetailsActivity::class.java)
         intent.putExtra("idProvF", idProv)
+        startActivity(intent)
+    }
+
+    private fun onBuySelected(listDetailProv: ProductsDetailsDb){
+        stockProv = listDetailProv.stockSold.toString()
+        val intent = Intent(this, ProductDetailsActivity::class.java)
+        intent.putExtra("stockProvF", stockProv)
         startActivity(intent)
     }
 
