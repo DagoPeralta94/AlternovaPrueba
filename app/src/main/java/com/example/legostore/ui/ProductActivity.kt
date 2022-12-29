@@ -62,17 +62,14 @@ class ProductActivity : AppCompatActivity() {
     }
 
     private fun onBuySelected(listDetailProv: ProductsDetailsDb){
-        stockProv = listDetailProv.stockSold.toString()
+        stockProv = listDetailProv.name
         finish()
         val intent = Intent(this, ConfirmeBuyActivity::class.java)
         intent.putExtra("stockProvF", stockProv)
         startActivity(intent)
     }
 
-    private suspend fun sendPostBuy() {
-        var productDblist = ProductDbClient.service.requestBuy()
-        productList = productDblist.products
-    }
+
 
     private fun alertDialogShow(listModelAllProducts: ProductsDetailsDb) =
         if(listModelAllProducts.stockSold != 0){
