@@ -10,6 +10,6 @@ interface ApiService {
     suspend fun listAllProducts(@Query("api_key") apiKey: String): ProductDb
 
     @GET("detail")
-    suspend fun listDetailProducts(@Query("api_key") apiKey: String): ProductsDetailsDb
+    suspend fun listDetailProducts(@Query("id") idProduct: String): ProductsDetailsDb
 
 }

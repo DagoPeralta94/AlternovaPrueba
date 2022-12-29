@@ -55,7 +55,7 @@ class ProductActivity : AppCompatActivity() {
     private fun onItemSelected(listDetailProv: ProductsDetailsDb){
         idProv = listDetailProv.id.toString()
         val intent = Intent(this, ProductDetailsActivity::class.java)
-        intent.putExtra("direccion", idProv)
+        intent.putExtra("idProvF", idProv)
         startActivity(intent)
     }
 }
