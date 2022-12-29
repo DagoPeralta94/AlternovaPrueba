@@ -1,5 +1,6 @@
 package com.example.legostore.ui
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
@@ -20,6 +21,7 @@ class ProductActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityProductBinding
     lateinit var productList: List<ProductsDetailsDb>
+    var idProv: String = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -51,6 +53,9 @@ class ProductActivity : AppCompatActivity() {
     }
 
     private fun onItemSelected(listDetailProv: ProductsDetailsDb){
-        Toast.makeText(binding.rvProducts.context, listDetailProv.name, Toast.LENGTH_SHORT).show()
+        idProv = listDetailProv.id.toString()
+        val intent = Intent(this, ProductDetailsActivity::class.java)
+        intent.putExtra("direccion", idProv)
+        startActivity(intent)
     }
 }
