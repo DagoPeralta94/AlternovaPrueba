@@ -1,6 +1,7 @@
 package com.example.legostore.core.adapter
 
 import android.view.View
+import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.legostore.aplications.AppConstants
@@ -19,6 +20,16 @@ class ProductsHolder(view: View) : RecyclerView.ViewHolder(view) {
             tvProductPrice.text = ("Price: ${listModelAllProducts.unit_price.toString()}")
             tvProductStock.text = ("Stock: ${listModelAllProducts.stock.toString()}")
             itemView.setOnClickListener { onClickListener(listModelAllProducts) }
+            toBuyItem(listModelAllProducts)
+            btBuy.setOnClickListener {
+
+                Toast.makeText(btBuy.context, "$tvProductStock", Toast.LENGTH_SHORT).show()
+            }
+        }
+    }
+    fun toBuyItem(listModelAllProducts: ProductsDetailsDb) {
+        if(listModelAllProducts.stock.toString() == "0"){
+            binding.btBuy.isEnabled = false
         }
     }
 }

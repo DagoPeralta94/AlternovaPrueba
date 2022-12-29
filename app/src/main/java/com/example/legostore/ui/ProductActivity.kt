@@ -3,6 +3,7 @@ package com.example.legostore.ui
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.legostore.aplications.AppConstants
 import com.example.legostore.core.adapter.ProductsAdapter
@@ -18,6 +19,7 @@ class ProductActivity : AppCompatActivity() {
     private lateinit var binding: ActivityProductBinding
     lateinit var productList: List<ProductsDetailsDb>
     var idProv: String = ""
+    var stockProv: String = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -38,7 +40,7 @@ class ProductActivity : AppCompatActivity() {
                 LinearLayoutManager.VERTICAL,
                 false
             )
-            rvProducts.adapter = ProductsAdapter(productList)  { onItemSelected(it) }
+            rvProducts.adapter = ProductsAdapter(productList) { onItemSelected(it) }
             ProductsAdapter(productList)  { onItemSelected(it) } .notifyDataSetChanged()
         }
     }
@@ -53,5 +55,11 @@ class ProductActivity : AppCompatActivity() {
         val intent = Intent(this, ProductDetailsActivity::class.java)
         intent.putExtra("idProvF", idProv)
         startActivity(intent)
+    }
+
+    private fun onButtomSelected(listDetailProv: ProductsDetailsDb) {
+        stockProv = listDetailProv.stock.toString()
+        Toast.makeText(this, "$stockProv", Toast.LENGTH_SHORT).show()
+
     }
 }
